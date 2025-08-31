@@ -25,7 +25,7 @@ public class ForumController {
     @ResponseBody
     public ResponseEntity<List<QuestionDTO>> getClients() {
         log.info("Getting questions");
-        return ResponseEntity.ok(forumService.getSampleQuestions());
+        return ResponseEntity.ok(forumService.getQuestion());
     }
 
 

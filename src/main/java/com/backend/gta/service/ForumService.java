@@ -2,18 +2,23 @@ package com.backend.gta.service;
 
 import com.backend.gta.model.dto.QuestionDTO;
 import com.backend.gta.model.dto.ReplyDTO;
+import com.backend.gta.persistence.repository.QuestionRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class ForumService {
 
+    @Autowired
+    private QuestionRepository questionRepository;
 
     public List<QuestionDTO> getSampleQuestions() {
         List<QuestionDTO> questions = new ArrayList<>();
@@ -91,5 +96,11 @@ public class ForumService {
         return questions;
     }
 
-
+    public List<QuestionDTO> getQuestion() {
+        return questionRepository.findAll()
+                .stream()
+                .map(QuestionDTO::fromEntity)
+                .collect(Collectors.toList());
+    }
 }
+
